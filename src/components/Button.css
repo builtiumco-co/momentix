@@ -54,7 +54,9 @@
 
 /* States */
 .btn:disabled {
-  opacity: 0.6;
+  background-color: #F5F1ED !important;
+  color: #A09E9C !important;
+  border-color: transparent !important;
   cursor: not-allowed;
   box-shadow: none;
 }

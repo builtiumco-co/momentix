@@ -58,10 +58,11 @@
 }
 
 .auth-card h2 {
-  text-align: center;
+  text-align: left;
   margin-bottom: var(--spacing-xl);
   font-size: 28px;
   color: var(--color-text-primary);
+  font-weight: 700;
 }
 
 .auth-form {
@@ -146,6 +147,7 @@
   margin-top: var(--spacing-xl);
   font-size: 14px;
   color: var(--color-text-secondary);
+  text-align: center;
 }
 
 .auth-footer a {
