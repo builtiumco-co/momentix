@@ -20,6 +20,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/auth/login" element={<Auth />} />
+          <Route path="/auth/signup" element={<Auth />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/create" element={<ProtectedRoute><CreateStory /></ProtectedRoute>} />
           <Route path="/story/:shareId" element={<StoryView />} />
