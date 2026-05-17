@@ -75,6 +75,7 @@
 }
 
 @media (max-width: 640px) {
+  .navbar-container { padding: 0 var(--spacing-md); }
   .nav-btn .btn-text {
     display: none;
   }
@@ -82,4 +83,6 @@
     padding: 8px !important;
     min-width: 40px;
   }
+  .navbar-actions { gap: var(--spacing-md); }
+  .navbar-logo span { font-size: 18px; }
 }

@@ -154,3 +154,12 @@
   font-weight: 500;
   color: var(--color-accent-gold);
 }
+
+@media (max-width: 640px) {
+  .auth-page { padding: var(--spacing-lg) var(--spacing-md); }
+  .auth-header { margin-bottom: var(--spacing-xl); }
+  .logo-icon { width: 56px; height: 56px; }
+  .logo-container h1 { font-size: 32px; }
+  .auth-card h2 { font-size: 24px; margin-bottom: var(--spacing-lg); }
+  .auth-form { gap: var(--spacing-md); }
+}
