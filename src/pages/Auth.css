@@ -93,7 +93,8 @@
   accent-color: var(--color-accent-gold);
 }
 
-.terms-container label {
+.terms-container label,
+.terms-container .terms-label-text {
   font-size: 14px;
   color: var(--color-text-primary);
 }
