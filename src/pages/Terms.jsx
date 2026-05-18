@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-import './Terms.css';
+import './Legal.css';
 
 const Terms = () => {
   return (
