@@ -61,9 +61,7 @@ const Auth = () => {
     <div className="auth-page fade-in">
       <div className="auth-header">
         <div className="logo-container">
-          <div className="logo-icon">
-            <img src={IconLogo} alt="Momentix Icon" width="32" height="32" />
-          </div>
+          <img src={IconLogo} alt="Momentix Icon" className="auth-logo-img" />
           <h1>Momentix</h1>
           <p className="auth-tagline">Turn memories into beautiful stories</p>
         </div>
