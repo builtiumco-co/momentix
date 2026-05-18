@@ -2,7 +2,8 @@ import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import Button from '../components/Button';
-import { BookOpen, Plus, LogOut, User } from 'lucide-react';
+import { Plus, LogOut, User } from 'lucide-react';
+import FullLogo from '../logo/Momentix logo.svg';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -18,8 +19,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <BookOpen size={24} color="var(--color-accent-gold)" />
-          <span>Momentix</span>
+          <img src={FullLogo} alt="Momentix Logo" className="logo-img-full" />
         </Link>
 
         <div className="navbar-actions">

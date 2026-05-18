@@ -22,15 +22,12 @@
 .navbar-logo {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--color-text-primary);
+  text-decoration: none;
 }
 
-.navbar-logo span {
-  letter-spacing: -0.5px;
+.logo-img-full {
+  height: 36px;
+  width: auto;
 }
 
 .navbar-actions {
