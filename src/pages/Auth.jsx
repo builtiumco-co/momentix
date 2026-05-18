@@ -128,7 +128,7 @@ const Auth = () => {
                 checked={formData.termsAccepted}
                 onChange={(e) => setFormData({ ...formData, termsAccepted: e.target.checked })}
               />
-              <label htmlFor="terms">I agree to the <a href="#">Terms & Conditions</a></label>
+              <label htmlFor="terms">I agree to the <Link to="/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</Link></label>
             </div>
           )}
 
