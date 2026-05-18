@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import Card from '../components/Card';
 import PasswordStrength from '../components/PasswordStrength';
-import { BookOpen } from 'lucide-react';
+import IconLogo from '../logo/icon.svg';
 import './Auth.css';
 
 const Auth = () => {
@@ -62,7 +62,7 @@ const Auth = () => {
       <div className="auth-header">
         <div className="logo-container">
           <div className="logo-icon">
-            <BookOpen size={32} strokeWidth={1.5} />
+            <img src={IconLogo} alt="Momentix Icon" width="32" height="32" />
           </div>
           <h1>Momentix</h1>
           <p className="auth-tagline">Turn memories into beautiful stories</p>

@@ -22,11 +22,17 @@
 .navbar-logo {
   display: flex;
   align-items: center;
+  gap: var(--spacing-sm);
   text-decoration: none;
 }
 
-.logo-img-full {
-  height: 36px;
+.logo-img {
+  height: 32px;
+  width: auto;
+}
+
+.logo-text-img {
+  height: 18px; /* Adjust this to match the M icon visually */
   width: auto;
 }
 

@@ -3,7 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import Button from '../components/Button';
 import { Plus, LogOut, User } from 'lucide-react';
-import FullLogo from '../logo/Momentix logo.svg';
+import MLogo from '../logo/M.svg';
+import TextLogo from '../logo/Momentix text.svg';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -19,7 +20,8 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <Link to="/" className="navbar-logo">
-          <img src={FullLogo} alt="Momentix Logo" className="logo-img-full" />
+          <img src={MLogo} alt="Momentix Icon" className="logo-img" />
+          <img src={TextLogo} alt="Momentix Text" className="logo-text-img" />
         </Link>
 
         <div className="navbar-actions">
