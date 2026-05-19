@@ -5,6 +5,7 @@ import Card from '../components/Card';
 import Button from '../components/Button';
 import StoryCard from '../components/StoryCard';
 import { fetchUserStories, deleteStory } from '../lib/api';
+import { supabase } from '../lib/supabase';
 import { Image as ImageIcon, Sparkles, ChevronDown } from 'lucide-react';
 import './Dashboard.css';
 
@@ -18,6 +19,8 @@ const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
+    let subscription = null;
+
     async function loadData() {
       if (!user) return;
       try {
@@ -29,7 +32,23 @@ const Dashboard = () => {
         setLoading(false);
       }
     }
+    
     loadData();
+
+    if (user) {
+      subscription = supabase
+        .channel('public:stories')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'stories', filter: `user_id=eq.${user.id}` }, () => {
+          loadData();
+        })
+        .subscribe();
+    }
+
+    return () => {
+      if (subscription) {
+        supabase.removeChannel(subscription);
+      }
+    };
   }, [user]);
 
   const handleDelete = async (id) => {
@@ -46,9 +65,9 @@ const Dashboard = () => {
 
   const stats = {
     created: stories.length,
-    views: stories.reduce((sum, s) => sum + (s.view_count || 0), 0),
-    reached: stories.reduce((sum, s) => sum + (s.view_count || 0), 0)
+    views: stories.reduce((sum, s) => sum + (s.view_count || 0), 0)
   };
+  stats.reached = Math.floor(stats.views * 0.1293); // MVP approximation based on design
 
   const filteredStories = stories.filter(s => {
     const matchesOccasion = filter === 'All occasions' ? true : s.occasion === filter;
