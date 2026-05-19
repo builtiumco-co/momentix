@@ -8,6 +8,7 @@ import CreateStory from './pages/CreateStory'
 import StoryView from './pages/StoryView'
 import Terms from './pages/Terms'
 import Privacy from './pages/Privacy'
+import Settings from './pages/Settings'
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth()
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/auth/signup" element={<Auth />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/create" element={<ProtectedRoute><CreateStory /></ProtectedRoute>} />
+          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="/story/:shareId" element={<StoryView />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import Button from '../components/Button';
-import { Plus, LogOut, ChevronDown } from 'lucide-react';
+import { Plus, LogOut, ChevronDown, User, Settings } from 'lucide-react';
 import MLogo from '../logo/M.svg';
 import TextLogo from '../logo/Momentix text.svg';
 import './Navbar.css';
@@ -60,8 +60,8 @@ const Navbar = () => {
                 </button>
                 {showDropdown && (
                   <div className="avatar-dropdown fade-in">
-                    <button className="dropdown-item" disabled>Profile</button>
-                    <button className="dropdown-item" disabled>Settings</button>
+                    <button className="dropdown-item" disabled><User size={16} /> Profile</button>
+                    <button className="dropdown-item" onClick={() => { setShowDropdown(false); navigate('/settings'); }}><Settings size={16} /> Settings</button>
                     <div className="dropdown-divider"></div>
                     <button className="dropdown-item logout" onClick={handleLogout}>
                       <LogOut size={16} /> Logout
