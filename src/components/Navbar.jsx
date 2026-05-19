@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import Button from '../components/Button';
-import { Plus, LogOut, User } from 'lucide-react';
+import { Plus, LogOut, ChevronDown } from 'lucide-react';
 import MLogo from '../logo/M.svg';
 import TextLogo from '../logo/Momentix text.svg';
 import './Navbar.css';
@@ -10,6 +10,18 @@ import './Navbar.css';
 const Navbar = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const handleLogout = async () => {
     await signOut();
@@ -36,13 +48,26 @@ const Navbar = () => {
               >
                 New Story
               </Button>
-              <div className="user-profile">
-                <div className="avatar">
-                  {user.email[0].toUpperCase()}
-                </div>
-                <button onClick={handleLogout} className="logout-btn" title="Sign out">
-                  <LogOut size={20} />
+              <div className="user-profile" ref={dropdownRef}>
+                <button 
+                  className="avatar-btn" 
+                  onClick={() => setShowDropdown(!showDropdown)}
+                >
+                  <div className="avatar">
+                    {user.email[0].toUpperCase()}
+                  </div>
+                  <ChevronDown size={16} className="avatar-chevron" />
                 </button>
+                {showDropdown && (
+                  <div className="avatar-dropdown fade-in">
+                    <button className="dropdown-item" disabled>Profile</button>
+                    <button className="dropdown-item" disabled>Settings</button>
+                    <div className="dropdown-divider"></div>
+                    <button className="dropdown-item logout" onClick={handleLogout}>
+                      <LogOut size={16} /> Logout
+                    </button>
+                  </div>
+                )}
               </div>
             </>
           ) : (
