@@ -130,7 +130,7 @@ const Auth = () => {
               />
               <span className="terms-label-text">
                 <label htmlFor="terms">I agree to the </label>
-                <Link to="/terms" target="_blank" rel="noopener noreferrer">Terms</Link> & <Link to="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</Link>
+                <a href="/terms" target="_blank" rel="noopener noreferrer">Terms</a> & <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
               </span>
             </div>
           )}
