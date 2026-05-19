@@ -1,0 +1,137 @@
+.template-renderer {
+  width: 100%;
+  min-height: 100vh;
+}
+.template-renderer.color-terracotta { background-color: #FAF0EB; color: #3D1A0B; --accent: #C4663A; }
+.template-renderer.color-blush { background-color: #FDF0F3; color: #3D1020; --accent: #B85C72; }
+.template-renderer.color-sage { background-color: #EFF5EE; color: #162414; --accent: #4A7A45; }
+.template-renderer.color-ivory { background-color: #FAF8F2; color: #2C2410; --accent: #8A7340; }
+.template-renderer.color-slate { background-color: #F0F2F5; color: #111827; --accent: #3A5080; }
+
+.standard-layout {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.split-layout {
+  display: flex;
+  min-height: 100vh;
+}
+.split-left {
+  flex: 1;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.split-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.split-right {
+  flex: 1;
+  padding: 80px 48px;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.occasion-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+  background-color: rgba(0,0,0,0.05);
+}
+
+.story-title {
+  font-size: 48px;
+  line-height: 1.2;
+  margin: 0 0 40px 0;
+}
+
+.photo-strip {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  margin-bottom: 64px;
+}
+.photo-strip img {
+  height: 300px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.narrative-content {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.rendered-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+}
+
+.section-prose {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  line-height: 1.67;
+  margin: 0;
+}
+
+.story-footer {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  opacity: 0.5;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+}
+
+.divider {
+  width: 80px;
+  height: 1px;
+  background-color: currentColor;
+}
+
+@media (max-width: 768px) {
+  .split-layout {
+    flex-direction: column;
+  }
+  .split-left {
+    max-height: 40vh;
+  }
+  .split-right {
+    padding: 40px 24px;
+    max-height: none;
+    overflow-y: visible;
+  }
+  .standard-layout {
+    padding: 40px 24px;
+  }
+  .story-title {
+    font-size: 36px;
+  }
+  .photo-strip img {
+    height: 200px;
+  }
+}
