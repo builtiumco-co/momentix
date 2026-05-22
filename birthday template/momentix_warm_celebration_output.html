@@ -1,0 +1,116 @@
+
+<h2 class="sr-only">Warm Celebration birthday story output showing a scrollable single-page narrative with photos between sections</h2>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.story{background:#FAF0EB;font-family:Georgia,var(--font-serif),serif;width:100%}
+.topbar{display:flex;justify-content:flex-end;align-items:center;padding:12px 28px;background:transparent}
+.topbar span{font-size:12px;color:#3D1A0B;opacity:0.45;font-family:var(--font-sans)}
+.hero{width:100%;height:280px;background:linear-gradient(180deg,#C4663A 0%,#7A3018 100%);position:relative;overflow:hidden}
+.hero-img{width:100%;height:100%;object-fit:cover;display:block;background:linear-gradient(135deg,#C4663A 0%,#8B3A1A 50%,#5C2010 100%)}
+.hero-overlay{position:absolute;bottom:0;left:0;right:0;height:70%;background:linear-gradient(to top,rgba(61,26,11,0.72),transparent)}
+.hero-text{position:absolute;bottom:0;left:0;padding:24px 28px}
+.hero-badges{display:flex;gap:8px;margin-bottom:10px}
+.hero-badge{background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.32);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:500;color:#fff;font-family:var(--font-sans)}
+.hero-title{font-size:28px;font-weight:700;color:#fff;line-height:1.2;margin-bottom:5px}
+.hero-date{font-size:13px;color:rgba(255,255,255,0.72);font-family:var(--font-sans)}
+.body{max-width:640px;margin:0 auto;padding:40px 24px 56px}
+.rule{width:100%;height:1px;background:#C4663A;opacity:0.22;margin-bottom:40px}
+.section-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#C4663A;font-family:var(--font-sans);margin-bottom:12px}
+.prose{font-size:17px;color:#3D1A0B;line-height:1.72;margin-bottom:32px}
+.photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:44px}
+.photo-box{border-radius:10px;overflow:hidden;height:180px}
+.photo-box svg{width:100%;height:100%;display:block}
+.photo-single{border-radius:10px;overflow:hidden;height:220px;margin-bottom:44px}
+.photo-single svg{width:100%;height:100%;display:block}
+.pull-quote{border-left:3px solid #C4663A;padding-left:18px;margin:0 0 28px;border-radius:0}
+.pull-quote p{font-size:18px;font-style:italic;color:#C4663A;line-height:1.6}
+.photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:44px}
+.photo-strip-item{border-radius:8px;overflow:hidden;height:130px}
+.photo-strip-item svg{width:100%;height:100%;display:block}
+.closing{font-size:18px;font-style:italic;color:#3D1A0B;line-height:1.72;max-width:540px;margin-bottom:56px}
+.footer{text-align:center;padding-top:24px;border-top:1px solid rgba(196,102,58,0.2)}
+.footer p{font-size:12px;color:#3D1A0B;opacity:0.42;font-family:var(--font-sans)}
+</style>
+
+<div class="story">
+  <div class="topbar">
+    <span>Created with Momentix</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-img">
+      <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+        <rect width="640" height="280" fill="#8B3A1A"/>
+        <ellipse cx="120" cy="80" rx="160" ry="120" fill="#C4663A" fill-opacity="0.3"/>
+        <ellipse cx="520" cy="200" rx="140" ry="100" fill="#5C2010" fill-opacity="0.4"/>
+        <rect x="0" y="160" width="640" height="120" fill="url(#herograd)"/>
+        <defs><linearGradient id="herograd" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3D1A0B" stop-opacity="0"/><stop offset="100%" stop-color="#3D1A0B" stop-opacity="0.7"/></linearGradient></defs>
+      </svg>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <div class="hero-badges">
+        <span class="hero-badge">Birthday</span>
+        <span class="hero-badge">70 years</span>
+      </div>
+      <div class="hero-title">Nne's 70th Birthday</div>
+      <div class="hero-date">10 May 2025 · Lagos</div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="rule"></div>
+
+    <div class="section-label">The Gathering</div>
+    <p class="prose">The compound was alive before she arrived. Folded chairs crowded every corner, garlands of yellow and white wound around the gate, and the smell of jollof smoke carried from the kitchen across the road. Her children had been there since dawn, whispering and laughing and pretending not to be nervous. By the time the car turned onto the street, eighty people were holding their breath.</p>
+
+    <div class="photo-pair">
+      <div class="photo-box">
+        <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="180" fill="#C4663A" fill-opacity="0.14"/>
+          <ellipse cx="150" cy="70" rx="80" ry="55" fill="#C4663A" fill-opacity="0.18"/>
+          <rect x="60" y="130" width="180" height="8" rx="4" fill="#C4663A" fill-opacity="0.12"/>
+        </svg>
+      </div>
+      <div class="photo-box">
+        <svg viewBox="0 0 300 180" xmlns="http://www.w3.org/2000/svg">
+          <rect width="300" height="180" fill="#8B3A1A" fill-opacity="0.10"/>
+          <ellipse cx="120" cy="90" rx="70" ry="65" fill="#C4663A" fill-opacity="0.15"/>
+          <rect x="80" y="148" width="140" height="6" rx="3" fill="#C4663A" fill-opacity="0.10"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="section-label">The Moment</div>
+    <p class="prose">Nobody had warned her. When the gate swung open and she saw the faces — her sisters, her grandchildren, old friends she hadn't seen in years — she stopped walking and put both hands over her mouth. There was a beat of pure silence before the ululation started. Her youngest daughter ran to her first, and then everyone did.</p>
+
+    <div class="pull-quote">
+      <p>"Seventy years and she still makes every room feel like home."</p>
+    </div>
+
+    <div class="photo-single">
+      <svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg">
+        <rect width="640" height="220" fill="#C4663A" fill-opacity="0.10"/>
+        <ellipse cx="320" cy="90" rx="200" ry="100" fill="#C4663A" fill-opacity="0.12"/>
+        <rect x="180" y="185" width="280" height="8" rx="4" fill="#C4663A" fill-opacity="0.08"/>
+      </svg>
+    </div>
+
+    <div class="section-label">The People</div>
+    <p class="prose">Her children came from three states. Her church women wore matching lace — deep burgundy, chosen months in advance. The grandchildren sat in a row at the front, freshly pressed, trying to behave. Her eldest brother gave a blessing so long and beautiful that by the end of it, no one was dry-eyed.</p>
+
+    <div class="photo-strip">
+      <div class="photo-strip-item"><svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="130" fill="#C4663A" fill-opacity="0.12"/><ellipse cx="100" cy="60" rx="60" ry="45" fill="#C4663A" fill-opacity="0.14"/></svg></div>
+      <div class="photo-strip-item"><svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="130" fill="#8B3A1A" fill-opacity="0.08"/><ellipse cx="80" cy="65" rx="55" ry="50" fill="#C4663A" fill-opacity="0.14"/></svg></div>
+      <div class="photo-strip-item"><svg viewBox="0 0 200 130" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="130" fill="#C4663A" fill-opacity="0.10"/><ellipse cx="120" cy="55" rx="65" ry="48" fill="#8B3A1A" fill-opacity="0.12"/></svg></div>
+    </div>
+
+    <div class="section-label">Looking Ahead</div>
+    <p class="closing">Seventy years of grace, and still she dances. Still she prays over everyone who enters her door. If there is a secret to a life this full, she has never said it plainly — but today, watching her move through the crowd, it felt obvious.</p>
+
+    <div class="footer">
+      <p>Created with Momentix</p>
+    </div>
+  </div>
+</div>

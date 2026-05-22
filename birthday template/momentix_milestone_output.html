@@ -1,0 +1,87 @@
+
+<h2 class="sr-only">Milestone birthday story output with split layout: sticky portrait panel on left and scrolling narrative on right</h2>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.page{background:#FAF8F2;font-family:Georgia,var(--font-serif),serif;width:100%}
+.topbar{display:flex;justify-content:flex-end;padding:12px 24px;font-family:var(--font-sans);font-size:12px;color:#2C2410;opacity:0.4}
+.split{display:grid;grid-template-columns:2fr 3fr;min-height:560px}
+.left{background:#F0EBE0;padding:28px 24px 0;display:flex;flex-direction:column;gap:16px}
+.occ-label{font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#8A7340;font-family:var(--font-sans)}
+.honouree{font-size:22px;font-weight:700;color:#2C2410;line-height:1.25}
+.pull-block{border-left:3px solid #8A7340;padding-left:14px;border-radius:0}
+.pull-text{font-size:15px;font-style:italic;color:#8A7340;line-height:1.6}
+.thin-rule{width:56px;height:1px;background:#8A7340;opacity:0.3;margin:4px 0}
+.date-info{font-family:var(--font-sans);font-size:12px;color:#2C2410;opacity:0.55;line-height:1.8}
+.portrait{flex:1;min-height:180px;background:#8A7340;border-radius:0;overflow:hidden;margin:0 -24px}
+.portrait svg{width:100%;height:100%;display:block}
+.right{padding:28px 24px 40px;background:#FAF8F2}
+.section-label{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#8A7340;font-family:var(--font-sans);margin-bottom:10px}
+.prose{font-size:16px;color:#2C2410;line-height:1.75;margin-bottom:28px}
+.photo-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px}
+.photo-sm{border-radius:8px;height:100px;overflow:hidden}
+.photo-sm svg{width:100%;height:100%;display:block}
+.photo-full{border-radius:8px;height:180px;overflow:hidden;margin-bottom:28px}
+.photo-full svg{width:100%;height:100%;display:block}
+.closing{font-size:17px;font-style:italic;color:#8A7340;line-height:1.75;margin-bottom:24px}
+.photo-mini-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:32px}
+.photo-mini{border-radius:6px;height:64px;overflow:hidden}
+.photo-mini svg{width:100%;height:100%;display:block}
+.footer{border-top:1px solid rgba(138,115,64,0.18);padding-top:16px;font-family:var(--font-sans);font-size:12px;color:#2C2410;opacity:0.4}
+</style>
+
+<div class="page">
+  <div class="topbar">Created with Momentix</div>
+  <div class="split">
+
+    <div class="left">
+      <p class="occ-label">Birthday · 70 years</p>
+      <p class="honouree">Ngozi Adaeze Okafor</p>
+      <div class="pull-block">
+        <p class="pull-text">"Still she dances."</p>
+      </div>
+      <div class="thin-rule"></div>
+      <div class="date-info">10 May 2025<br>Lagos, Nigeria</div>
+      <div class="portrait">
+        <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg">
+          <rect width="240" height="280" fill="#8A7340" fill-opacity="0.18"/>
+          <ellipse cx="120" cy="90" rx="70" ry="90" fill="#8A7340" fill-opacity="0.20"/>
+          <ellipse cx="120" cy="240" rx="100" ry="60" fill="#8A7340" fill-opacity="0.14"/>
+          <rect x="40" y="250" width="160" height="6" rx="3" fill="#8A7340" fill-opacity="0.12"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="section-label">Looking back</div>
+      <p class="prose">She was born in a village that no longer has its old name. She walked to school before there was a road. She raised five children in three different cities, kept a home wherever she landed, and made each one feel like it had always been there. Seventy years reads like a quiet miracle when you know where it started.</p>
+
+      <div class="section-label">What she built</div>
+      <p class="prose">Not buildings. Not titles. She built people. Every one of her children carries something of her — the way she listens without interrupting, the way she prays as though she expects an answer, the way she laughs from somewhere deep and unguarded.</p>
+
+      <div class="photo-row">
+        <div class="photo-sm"><svg viewBox="0 0 180 100" xmlns="http://www.w3.org/2000/svg"><rect width="180" height="100" fill="#8A7340" fill-opacity="0.12"/><ellipse cx="90" cy="50" rx="55" ry="40" fill="#8A7340" fill-opacity="0.15"/></svg></div>
+        <div class="photo-sm"><svg viewBox="0 0 180 100" xmlns="http://www.w3.org/2000/svg"><rect width="180" height="100" fill="#2C2410" fill-opacity="0.07"/><ellipse cx="80" cy="45" rx="50" ry="38" fill="#8A7340" fill-opacity="0.14"/></svg></div>
+      </div>
+
+      <div class="section-label">The celebration</div>
+      <p class="prose">The compound had not seen this many people since her husband's funeral, fifteen years ago. But this time the sound was different — louder, lighter, unafraid. They danced for two hours. She outlasted most of them.</p>
+
+      <div class="photo-full"><svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="180" fill="#8A7340" fill-opacity="0.10"/><ellipse cx="200" cy="80" rx="160" ry="90" fill="#8A7340" fill-opacity="0.12"/></svg></div>
+
+      <div class="section-label">The legacy</div>
+      <p class="prose">Her grandchildren do not yet understand what they are inheriting. They will. The stories she tells, the way she holds her ground, the warmth she extends to strangers — these things travel forward.</p>
+      <p class="closing">Seventy years, and the best of her is still arriving.</p>
+
+      <div class="photo-mini-row">
+        <div class="photo-mini"><svg viewBox="0 0 80 64" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="64" fill="#8A7340" fill-opacity="0.12"/></svg></div>
+        <div class="photo-mini"><svg viewBox="0 0 80 64" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="64" fill="#2C2410" fill-opacity="0.07"/></svg></div>
+        <div class="photo-mini"><svg viewBox="0 0 80 64" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="64" fill="#8A7340" fill-opacity="0.10"/></svg></div>
+        <div class="photo-mini"><svg viewBox="0 0 80 64" xmlns="http://www.w3.org/2000/svg"><rect width="80" height="64" fill="#2C2410" fill-opacity="0.08"/></svg></div>
+      </div>
+
+      <div class="footer">Created with Momentix</div>
+    </div>
+
+  </div>
+</div>

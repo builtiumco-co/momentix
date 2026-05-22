@@ -61,12 +61,12 @@ export default function EditStory() {
         </button>
       </header>
 
-      <main className="edit-main">
-        {step === 2 && <Step2Photos story={story} onNext={() => goToStep(3)} setStory={setStory} />}
-        {step === 3 && <Step3Memories story={story} onNext={() => goToStep(4)} setStory={setStory} />}
-        {step === 4 && <Step4Preview story={story} onNext={() => goToStep(5)} setStory={setStory} />}
-        {step === 5 && <Step5Share story={story} />}
-      </main>
-    </div>
+        <main className="edit-main">
+          {step === 2 && <Step3Memories story={story} onNext={() => goToStep(3)} setStory={setStory} />}
+          {step === 3 && <Step2Photos story={story} onNext={() => goToStep(4)} setStory={setStory} />}
+          {step === 4 && <Step4Preview story={story} onNext={() => goToStep(5)} setStory={setStory} />}
+          {step === 5 && <Step5Share story={story} />}
+        </main>
+      </div>
   );
 }
