@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UploadCloud, X, Grid, Sparkles } from 'lucide-react';
+import { UploadCloud, X, Grid, Sparkles, AlertTriangle } from 'lucide-react';
 import Button from '../Button';
 import { uploadStoryPhotos, deletePhoto } from '../../lib/api';
 import './Step2Photos.css';
@@ -7,14 +7,36 @@ import './Step2Photos.css';
 export default function Step2Photos({ story, onNext, setStory }) {
   const [isUploading, setIsUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
+  const [showSizeWarning, setShowSizeWarning] = useState(false);
 
   const photos = story.story_photos || [];
 
   const handleFiles = async (files) => {
     if (!files || files.length === 0) return;
+    
+    const availableSlots = 20 - photos.length;
+    if (availableSlots <= 0) {
+      alert('You can only upload up to 20 photos.');
+      return;
+    }
+
+    const filesToUpload = [];
+    let hasOversize = false;
+
+    for (let i = 0; i < Math.min(files.length, availableSlots); i++) {
+      if (files[i].size > 2 * 1024 * 1024) {
+        hasOversize = true;
+      }
+      filesToUpload.push(files[i]);
+    }
+
+    if (hasOversize) {
+      setShowSizeWarning(true);
+    }
+
     setIsUploading(true);
     try {
-      const newPhotos = await uploadStoryPhotos(story.id, files);
+      const newPhotos = await uploadStoryPhotos(story.id, filesToUpload);
       setStory({ ...story, story_photos: [...photos, ...newPhotos] });
     } catch (e) {
       console.error(e);
@@ -48,8 +70,23 @@ export default function Step2Photos({ story, onNext, setStory }) {
       <div className="step-left-col">
         <span className="step-badge">Step 3</span>
         <h2 className="step-title">Add your photos</h2>
-        <p className="step-subtext">Upload up to 30 photos. Add captions to help the AI tell your story better.</p>
+        <p className="step-subtext">Upload photos from the celebration. Keep them lightweight — smaller files load faster for everyone who views the story.</p>
         
+        <div className="compression-banner">
+          <p className="banner-text"><strong>Photos over 2MB will slow down your story.</strong></p>
+          <div className="banner-links">
+            <a href="#" className="banner-link">How to compress →</a>
+            <a href="#" className="banner-link highlight">Compress them for you →</a>
+          </div>
+        </div>
+
+        {showSizeWarning && (
+          <div className="size-warning">
+            <AlertTriangle size={16} />
+            <p>One or more photos are over 2MB. Consider compressing them for a faster story.</p>
+          </div>
+        )}
+
         <div 
           className={`upload-zone ${dragOver ? 'drag-over' : ''} ${photos.length > 0 ? 'compact' : ''}`}
           onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
@@ -61,11 +98,11 @@ export default function Step2Photos({ story, onNext, setStory }) {
           <p>or click to browse</p>
           <label className="upload-label-btn">
             Browse files
-            <input type="file" multiple accept="image/*" onChange={(e) => handleFiles(e.target.files)} />
+            <input type="file" multiple accept="image/jpeg, image/png, image/webp" onChange={(e) => handleFiles(e.target.files)} />
           </label>
         </div>
         <div className="upload-constraints">
-          JPG, PNG or WEBP · Max 10MB per photo · Up to 30 photos
+          JPG, PNG, WEBP · Max 2MB per photo · {photos.length} of 20 photos added
         </div>
       </div>
 

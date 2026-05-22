@@ -157,3 +157,59 @@
     position: static;
   }
 }
+
+/* Summary Screen Styles */
+.summary-view-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+}
+
+.summary-card {
+  width: 100%;
+  max-width: 600px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  padding: 40px;
+}
+
+.summary-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+  gap: 16px;
+}
+
+.summary-row:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  width: 140px;
+  flex-shrink: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.summary-value {
+  flex-grow: 1;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.empty-val {
+  color: #aaa;
+  font-style: italic;
+}
+
+.edit-val-btn {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
