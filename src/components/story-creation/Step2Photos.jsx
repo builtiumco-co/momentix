@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UploadCloud, X, Grid } from 'lucide-react';
+import { UploadCloud, X, Grid, Sparkles } from 'lucide-react';
 import Button from '../Button';
 import { uploadStoryPhotos, deletePhoto } from '../../lib/api';
 import './Step2Photos.css';
@@ -46,7 +46,7 @@ export default function Step2Photos({ story, onNext, setStory }) {
   return (
     <div className="step-container fade-in">
       <div className="step-left-col">
-        <span className="step-badge">Step 2</span>
+        <span className="step-badge">Step 3</span>
         <h2 className="step-title">Add your photos</h2>
         <p className="step-subtext">Upload up to 30 photos. Add captions to help the AI tell your story better.</p>
         
@@ -100,7 +100,7 @@ export default function Step2Photos({ story, onNext, setStory }) {
             onClick={onNext} 
             disabled={photos.length === 0 || isUploading}
           >
-            {isUploading ? 'Uploading...' : 'Continue →'}
+            <Sparkles size={16} /> {isUploading ? 'Uploading...' : 'Generate my story →'}
           </Button>
         </div>
       </div>

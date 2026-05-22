@@ -3,7 +3,7 @@ import { getTemplateById } from '../../lib/templates';
 import { updateStory, upsertStorySections } from '../../lib/api';
 import Button from '../Button';
 import './Step3Memories.css';
-import { Sparkles } from 'lucide-react';
+
 
 export default function Step3Memories({ story, onNext, setStory }) {
   const template = getTemplateById(story.template_id);
@@ -29,7 +29,7 @@ export default function Step3Memories({ story, onNext, setStory }) {
     setSections(prev => prev.map(s => s.section_id === sectionId ? { ...s, user_input: value } : s));
   };
 
-  const handleGenerate = async () => {
+  const handleContinue = async () => {
     setIsSaving(true);
     try {
       if (title !== story.title) {
@@ -50,7 +50,7 @@ export default function Step3Memories({ story, onNext, setStory }) {
   return (
     <div className="step-container fade-in">
       <div className="step-left-col sticky">
-        <span className="step-badge">Step 3</span>
+        <span className="step-badge">Step 2</span>
         <h2 className="step-title">Your memories</h2>
         <p className="step-subtext">Write as much or as little as you like. The AI will fill in the rest.</p>
         
@@ -104,10 +104,10 @@ export default function Step3Memories({ story, onNext, setStory }) {
           <Button variant="tertiary" onClick={() => window.history.back()}>← Back</Button>
           <Button 
             variant="primary" 
-            onClick={handleGenerate} 
+            onClick={handleContinue} 
             disabled={isSaving || !title.trim()}
           >
-            <Sparkles size={16} /> {isSaving ? 'Saving...' : 'Generate my story →'}
+            {isSaving ? 'Saving...' : 'Continue to photos →'}
           </Button>
         </div>
       </div>
