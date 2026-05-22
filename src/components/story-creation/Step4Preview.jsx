@@ -1,113 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { getTemplateById } from '../../lib/templates';
-import { generateSectionProse } from '../../lib/ai/generate';
-import { upsertStorySections } from '../../lib/api';
+import { useStoryGeneration } from '../../hooks/useStoryGeneration';
 import TemplateRenderer from '../story-templates/TemplateRenderer';
 import Button from '../Button';
-import { Sparkles, RefreshCw } from 'lucide-react';
+import { Sparkles, RefreshCw, AlertTriangle } from 'lucide-react';
 import './Step4Preview.css';
 
 export default function Step4Preview({ story, onNext, setStory }) {
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [loadingMsg, setLoadingMsg] = useState('Writing your story...');
   const template = getTemplateById(story.template_id);
+  const { state, sections, errorMessage, generate, regenerateSection } = useStoryGeneration();
 
   useEffect(() => {
-    generateAllUnfilled();
-  }, []);
-
-  const generateAllUnfilled = async () => {
-    if (!story.story_sections) return;
-    
-    // Check if any sections lack ai_output
-    const needsGeneration = story.story_sections.some(s => !s.ai_output);
-    if (!needsGeneration) return;
-
-    setIsGenerating(true);
-    let updatedSections = [...story.story_sections];
-
-    for (let i = 0; i < updatedSections.length; i++) {
-      const sec = updatedSections[i];
-      if (sec.ai_output) continue; // Already generated
-
-      const tSec = template.sections.find(t => t.id === sec.section_id);
-      if (!tSec) continue;
-
-      try {
-        setLoadingMsg(`Writing "${tSec.label}"...`);
-        const prose = await generateSectionProse({
-          occasion: story.occasion,
-          title: story.title,
-          templateTone: template.tone,
-          sectionLabel: tSec.label,
-          sectionHint: tSec.aiHint,
-          sectionMaxWords: tSec.maxWords,
-          userInput: sec.user_input
-        });
-        
-        updatedSections[i] = { ...sec, ai_output: prose };
-      } catch (e) {
-        console.error('Generation failed for section', tSec.label, e);
-        // Fallback gracefully
-        updatedSections[i] = { ...sec, ai_output: `[Generated content for ${tSec.label} would go here. AI generation failed. Please try regenerating.]` };
-      }
+    if (template) {
+      generate(story, template);
     }
-
-    // Save to DB
-    try {
-      setLoadingMsg('Saving your story...');
-      const saved = await upsertStorySections(story.id, updatedSections);
-      setStory({ ...story, story_sections: saved });
-    } catch (e) {
-      console.error(e);
-      alert('Failed to save generated story.');
-    } finally {
-      setIsGenerating(false);
-    }
-  };
+  }, []); // Run once on mount
 
   const handleRegenerate = async (sectionId) => {
-    setIsGenerating(true);
-    try {
-      const secIndex = story.story_sections.findIndex(s => s.section_id === sectionId);
-      const sec = story.story_sections[secIndex];
-      const tSec = template.sections.find(t => t.id === sectionId);
-      
-      setLoadingMsg(`Rewriting "${tSec.label}"...`);
-      const prose = await generateSectionProse({
-        occasion: story.occasion,
-        title: story.title,
-        templateTone: template.tone,
-        sectionLabel: tSec.label,
-        sectionHint: tSec.aiHint,
-        sectionMaxWords: tSec.maxWords,
-        userInput: sec.user_input
-      });
-
-      const updatedSections = [...story.story_sections];
-      updatedSections[secIndex] = { ...sec, ai_output: prose };
-      
-      const saved = await upsertStorySections(story.id, updatedSections);
-      setStory({ ...story, story_sections: saved });
-    } catch (e) {
-      console.error(e);
-      alert('Failed to regenerate section.');
-    } finally {
-      setIsGenerating(false);
-    }
+    await regenerateSection(story, template, sectionId);
   };
 
-  if (isGenerating) {
+  const updateStoryEditedText = (sectionId, newText) => {
+    const newSections = story.story_sections?.map(s => 
+      s.section_id === sectionId ? { ...s, edited_text: newText } : s
+    );
+    if (newSections) setStory({ ...story, story_sections: newSections });
+  };
+
+  if (state === 'error') {
     return (
-      <div className="generating-state fade-in">
-        <div className="shimmer-card">
-          <div className="shimmer-line l1"></div>
-          <div className="shimmer-line l2"></div>
-          <div className="shimmer-line l3"></div>
-          <div className="shimmer-line l1" style={{marginTop: '24px'}}></div>
-          <div className="shimmer-line l2"></div>
+      <div className="step-container fade-in" style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ textAlign: 'center', maxWidth: 400 }}>
+          <AlertTriangle size={48} color="red" style={{ marginBottom: 16 }} />
+          <h3>Generation Failed</h3>
+          <p>{errorMessage}</p>
+          <Button variant="primary" onClick={() => generate(story, template)} style={{ marginTop: 24 }}>
+            Try Again
+          </Button>
         </div>
-        <p className="loading-msg"><Sparkles size={16} /> {loadingMsg}</p>
       </div>
     );
   }
@@ -119,26 +49,53 @@ export default function Step4Preview({ story, onNext, setStory }) {
         <h2 className="step-title">Here's your story</h2>
         <p className="step-subtext">Read through it. Regenerate any section or edit directly.</p>
 
+        {state === 'captioning' && (
+          <div className="captioning-indicator" style={{ marginBottom: 24, display: 'flex', alignItems: 'center', gap: 8, color: 'var(--color-text-secondary)' }}>
+            <Sparkles size={16} className="spin-slow" />
+            <span>Reading your photos...</span>
+          </div>
+        )}
+
         <div className="narrative-editor">
-          {story.story_sections?.map(sec => {
-            const tSec = template.sections.find(t => t.id === sec.section_id);
+          {sections.map(sec => {
+            const isGenerating = sec.status === 'generating' || sec.status === 'pending';
+            // If it's already in DB and not currently generating, use DB text to allow live edits
+            const dbSec = story.story_sections?.find(s => s.section_id === sec.sectionId);
+            const displayProse = (sec.status === 'done' && dbSec) ? (dbSec.edited_text || dbSec.ai_output) : sec.prose;
+
             return (
-              <div key={sec.id} className="narrative-section">
+              <div key={sec.sectionId} className="narrative-section">
                 <div className="ns-header">
-                  <span className="ns-label">{tSec?.label}</span>
-                  <button className="regenerate-btn" onClick={() => handleRegenerate(sec.section_id)}>
-                    <RefreshCw size={12} /> Regenerate
-                  </button>
+                  <span className="ns-label">{sec.label}</span>
+                  {sec.status === 'done' && (
+                    <button className="regenerate-btn" onClick={() => handleRegenerate(sec.sectionId)}>
+                      <RefreshCw size={12} /> Regenerate
+                    </button>
+                  )}
                 </div>
-                <textarea 
-                  className="ns-prose"
-                  value={sec.edited_text || sec.ai_output || ''}
-                  onChange={(e) => {
-                    const newSections = story.story_sections.map(s => s.id === sec.id ? { ...s, edited_text: e.target.value } : s);
-                    setStory({ ...story, story_sections: newSections });
-                    // Auto-saving could be debounced here
-                  }}
-                />
+                {isGenerating && sec.prose === '' ? (
+                  <div className="shimmer-card" style={{ padding: 16 }}>
+                    <div className="shimmer-line l1"></div>
+                    <div className="shimmer-line l2"></div>
+                    <div className="shimmer-line l3"></div>
+                  </div>
+                ) : (
+                  <textarea 
+                    className="ns-prose"
+                    value={displayProse}
+                    readOnly={isGenerating}
+                    onChange={(e) => {
+                      if (!isGenerating) {
+                        updateStoryEditedText(sec.sectionId, e.target.value);
+                      }
+                    }}
+                  />
+                )}
+                {sec.status === 'error' && (
+                  <div style={{ color: 'red', fontSize: 12, marginTop: 8 }}>
+                    Failed to generate. <button onClick={() => handleRegenerate(sec.sectionId)}>Retry</button>
+                  </div>
+                )}
               </div>
             );
           })}
@@ -148,9 +105,8 @@ export default function Step4Preview({ story, onNext, setStory }) {
       <div className="step-right-col preview-sticky">
         <p className="preview-label">Story preview</p>
         <div className="mini-preview-card">
-          {/* A miniature rendering using CSS scale */}
           <div className="mini-render">
-            <TemplateRenderer story={story} />
+            <TemplateRenderer story={story} liveSections={sections} />
           </div>
         </div>
       </div>
@@ -158,8 +114,8 @@ export default function Step4Preview({ story, onNext, setStory }) {
       <div className="bottom-action-bar">
         <div className="action-bar-content">
           <Button variant="tertiary" onClick={() => window.history.back()}>← Back</Button>
-          <Button variant="primary" onClick={onNext}>
-            Publish & share →
+          <Button variant="primary" onClick={onNext} disabled={state !== 'done'}>
+            {state === 'done' ? 'Publish & share →' : 'Generating...'}
           </Button>
         </div>
       </div>

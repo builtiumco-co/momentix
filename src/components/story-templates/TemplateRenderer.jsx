@@ -2,7 +2,7 @@ import React from 'react';
 import './TemplateRenderer.css';
 import { getTemplateById } from '../../lib/templates';
 
-export default function TemplateRenderer({ story }) {
+export default function TemplateRenderer({ story, liveSections }) {
   const template = getTemplateById(story?.template_id);
   if (!template) return <div>Template not found</div>;
 
@@ -21,6 +21,15 @@ export default function TemplateRenderer({ story }) {
   };
 
   const renderSections = () => {
+    if (liveSections && liveSections.length > 0) {
+      return liveSections.map(lSec => (
+        <div key={lSec.sectionId} className="rendered-section">
+          <span className="section-label">{lSec.label}</span>
+          <p className="section-prose">{lSec.prose}</p>
+        </div>
+      ));
+    }
+
     return sections.map(sec => {
       const tSec = template.sections.find(t => t.id === sec.section_id);
       return (

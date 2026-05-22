@@ -1,8 +1,9 @@
-import { birthdayWarm, birthdayMilestone } from './birthday';
+import { birthdayWarm, birthdayMilestone, birthdayKids } from './birthday';
 
 export const templates = [
   birthdayWarm,
   birthdayMilestone,
+  birthdayKids,
 ];
 
 export const getTemplateById = (id) => templates.find(t => t.id === id);

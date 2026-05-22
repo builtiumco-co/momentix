@@ -7,41 +7,33 @@ export const birthdayWarm = {
   colorScheme: "terracotta",
   fontPairing: "playfair-dmsans",
   layout: "centered-narrative",
-  tone: "warm, celebratory, intimate",
+  tone: "warm, celebratory, intimate, personal",
   sections: [
     {
-      id: "opening",
+      id: "gathering",
       label: "The Gathering",
-      aiHint: "Set the scene. Describe the atmosphere, the people arriving, and the feeling in the air.",
-      userPrompt: "Who was there? Where did it happen?",
-      placeholder: "e.g. We gathered at the old oak tree park. Everyone from the office came...",
+      aiHint: "Set the scene before the honouree arrived. Location, atmosphere, guests, anticipation. Use location and guest list provided.",
       maxWords: 80,
       required: true
     },
     {
-      id: "highlight",
+      id: "moment",
       label: "The Moment",
-      aiHint: "Describe the highlight of the event. Build up to the surprise or the main toast.",
-      userPrompt: "What was the highlight? What made it special?",
-      placeholder: "e.g. When the cake came out, the lights went down and we sang...",
-      maxWords: 100,
+      aiHint: "Describe the emotional peak. The highlight moment the user described. Weave in any toast or speech if provided.",
+      maxWords: 80,
       required: true
     },
     {
       id: "people",
       label: "The People",
-      aiHint: "Focus on the connections, words shared, and gestures that stood out.",
-      userPrompt: "Who made this day? Any words or gestures that stood out?",
-      placeholder: "e.g. Uncle Joe gave a speech that made everyone cry...",
-      maxWords: 80,
-      required: false
+      aiHint: "Honour the relationships in the room. Who was there and what their presence meant. Warmth and connection, not a roll call.",
+      maxWords: 70,
+      required: true
     },
     {
       id: "closing",
       label: "Looking Ahead",
-      aiHint: "End on a hopeful, forward-looking note for the year ahead.",
-      userPrompt: "What does this celebration mean for the future?",
-      placeholder: "e.g. Here's to many more years of health and happiness.",
+      aiHint: "Warm reflective send-off. What made this birthday special. Reference the age. Slightly more lyrical.",
       maxWords: 60,
       required: true
     }
@@ -57,42 +49,76 @@ export const birthdayMilestone = {
   colorScheme: "ivory",
   fontPairing: "inter-dmsans",
   layout: "full-bleed",
-  tone: "elegant, reflective, celebratory",
+  tone: "reflective, dignified, legacy-focused",
   sections: [
     {
-      id: "reflection",
-      label: "Reflection",
-      aiHint: "Reflect on the journey so far. Set an elegant and thoughtful tone.",
-      userPrompt: "What does this milestone mean to the birthday person?",
-      placeholder: "e.g. Turning 50 feels like a new beginning rather than a midpoint...",
+      id: "lookingBack",
+      label: "Looking Back",
+      aiHint: "Reflect on the journey to this age. What it means to have arrived at this milestone. Quiet, thoughtful, not sentimental.",
       maxWords: 80,
       required: true
     },
     {
-      id: "journey",
-      label: "The Journey",
-      aiHint: "Describe the path they took to get here, acknowledging growth.",
-      userPrompt: "What are some key memories from the past decade?",
-      placeholder: "e.g. The past ten years have been filled with travel, career growth, and starting a family...",
-      maxWords: 100,
+      id: "whatTheyBuilt",
+      label: "What They Built",
+      aiHint: "What this person has built — relationships, character, presence. Use guest list and \"what made it special\" as context.",
+      maxWords: 80,
+      required: true
+    },
+    {
+      id: "celebration",
+      label: "The Celebration",
+      aiHint: "The celebration itself — place, people, highlight. Anchor in specific details. Warmer and more present-tense.",
+      maxWords: 75,
       required: true
     },
     {
       id: "legacy",
       label: "The Legacy",
-      aiHint: "Highlight the impact they have had on the people around them.",
-      userPrompt: "How has the birthday person inspired others?",
-      placeholder: "e.g. They have always been the rock of the family, always there to lend a hand...",
-      maxWords: 80,
-      required: false
+      aiHint: "What this person leaves behind — influence, warmth, what they mean to everyone there. Last sentence should land. Echo words said if provided.",
+      maxWords: 65,
+      required: true
+    }
+  ]
+};
+
+export const birthdayKids = {
+  id: "birthday-kids",
+  occasion: "Birthday",
+  name: "Kids Birthday",
+  description: "Playful and joyous layout for children's birthdays.",
+  thumbnail: "/templates/birthday-kids.png",
+  colorScheme: "amber",
+  fontPairing: "inter-dmsans",
+  layout: "full-bleed",
+  tone: "playful, joyful, light — the way a loving parent would remember the day",
+  sections: [
+    {
+      id: "morning",
+      label: "The Morning",
+      aiHint: "The child's excitement before the party. Punchy, light, short sentences fine.",
+      maxWords: 55,
+      required: true
     },
     {
-      id: "toast",
-      label: "The Toast",
-      aiHint: "Conclude with a grand toast to the future.",
-      userPrompt: "What is your wish for them going forward?",
-      placeholder: "e.g. May the next chapter be the most beautiful one yet.",
+      id: "party",
+      label: "The Party",
+      aiHint: "The chaos and joy of the party — guests, games, atmosphere. Embrace the energy.",
+      maxWords: 65,
+      required: true
+    },
+    {
+      id: "theCandles",
+      label: "The Moment",
+      aiHint: "Candles, wish, reaction. Use the highlight moment. Include words said if provided. Make the reader feel present.",
       maxWords: 60,
+      required: true
+    },
+    {
+      id: "growingUp",
+      label: "Growing Up",
+      aiHint: "2–3 sentences only. How fast they're growing. Reference age. Brief, precise, tender. No clichés.",
+      maxWords: 40,
       required: true
     }
   ]

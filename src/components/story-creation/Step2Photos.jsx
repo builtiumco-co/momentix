@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { UploadCloud, X, Grid, Sparkles, AlertTriangle } from 'lucide-react';
 import Button from '../Button';
 import { uploadStoryPhotos, deletePhoto } from '../../lib/api';
+import { compressPhotos } from '../../lib/photos/compress';
 import './Step2Photos.css';
 
 export default function Step2Photos({ story, onNext, setStory }) {
@@ -20,14 +21,14 @@ export default function Step2Photos({ story, onNext, setStory }) {
       return;
     }
 
-    const filesToUpload = [];
+    const rawFiles = [];
     let hasOversize = false;
 
     for (let i = 0; i < Math.min(files.length, availableSlots); i++) {
       if (files[i].size > 2 * 1024 * 1024) {
         hasOversize = true;
       }
-      filesToUpload.push(files[i]);
+      rawFiles.push(files[i]);
     }
 
     if (hasOversize) {
@@ -36,6 +37,7 @@ export default function Step2Photos({ story, onNext, setStory }) {
 
     setIsUploading(true);
     try {
+      const filesToUpload = await compressPhotos(rawFiles);
       const newPhotos = await uploadStoryPhotos(story.id, filesToUpload);
       setStory({ ...story, story_photos: [...photos, ...newPhotos] });
     } catch (e) {
