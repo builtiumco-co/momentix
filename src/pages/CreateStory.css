@@ -121,7 +121,7 @@
 }
 
 /* Bottom Action Bar */
-.bottom-action-bar {
+.template-picker-page .bottom-action-bar {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -136,7 +136,7 @@
   align-items: center;
 }
 
-.bottom-action-bar.visible {
+.template-picker-page .bottom-action-bar.visible {
   transform: translateY(0);
 }
 
