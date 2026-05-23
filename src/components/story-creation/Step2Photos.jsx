@@ -4,6 +4,7 @@ import Button from '../Button';
 import { uploadStoryPhotos, deletePhoto } from '../../lib/api';
 import { compressPhotos } from '../../lib/photos/compress';
 import './Step2Photos.css';
+import placeholderImg from '../../assets/placeholder.svg';
 
 export default function Step2Photos({ story, onNext, setStory }) {
   const [isUploading, setIsUploading] = useState(false);
@@ -114,7 +115,7 @@ export default function Step2Photos({ story, onNext, setStory }) {
             {photos.map((photo) => (
               <div key={photo.id} className="photo-tile">
                 <div className="photo-image-wrapper">
-                  <img src={photo.publicUrl || 'https://via.placeholder.com/120'} alt="Story content" />
+                  <img src={photo.publicUrl || placeholderImg} alt="Story content" />
                   <button className="delete-btn" onClick={() => handleDelete(photo)}>
                     <X size={14} />
                   </button>
