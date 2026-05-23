@@ -45,41 +45,7 @@ Do not start with "The image shows" or "In this photo". Just describe it directl
     return '';
   }
 }
-  if (!GEMINI_API_KEY) throw new Error("Gemini API key is missing.");
-
-  const prompt = `Describe what you see in this photo in ONE sentence (20 words maximum).
-Focus on: people present, their expressions or actions, the setting, and the mood.
-Do not start with "The image shows" or "In this photo". Just describe it directly.`;
-
-  const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      systemInstruction: { parts: [{ text: "You are a photo description assistant. Describe images clearly and concisely." }] },
-      contents: [{
-        parts: [
-          { text: prompt },
-          { inlineData: { data: base64Data.split(',')[1], mimeType } }
-        ]
-      }],
-      generationConfig: {
-        temperature: 0.3,
-        maxOutputTokens: 60,
-      }
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error('Captioning failed');
-  }
-
-  const data = await response.json();
-  if (!data.candidates || data.candidates.length === 0) {
-    return '';
-  }
-  
-  return data.candidates[0].content.parts[0].text.trim();
-}
+// Duplicate caption block removed – functionality handled by captionPhotoBase64 above.
 
 export async function generateSectionProseStream({ occasion, templateName, templateTone, sectionLabel, sectionHint, sectionMaxWords, userInput, photoCaptions }, onChunk) {
   if (!GEMINI_API_KEY) throw new Error("Gemini API key is missing.");
